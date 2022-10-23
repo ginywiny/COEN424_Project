@@ -1,0 +1,13 @@
+/**/.ipynb_checkpoints
+/**/__pycache__
+
+/lambda/lib
+/lambda/dist
+
+/ml/IGMC
+/ml/ml-latest-small
+/ml/raw_data
+/ml/data
+/ml/preprocessing.py
+/ml/util_functions.py
+/ml/data_utils.py
