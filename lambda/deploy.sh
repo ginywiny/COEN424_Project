@@ -1,8 +1,6 @@
-mkdir lib
 mkdir dist
+rm dist/deployment.zip
 
-pip3 freeze > requirements.txt
-pip3 install -r requirements.txt --target ./lib
-zip -r dist/deployment.zip ./lib/*
-zip -g dist/deployment.zip service.py
+#zip -q -r dist/deployment.zip ./../env/lib/python3.10/site-packages/*
+zip -g dist/deployment.zip lambda_function.py
 aws lambda update-function-code --function-name MovieRecommendation --zip-file fileb://dist/deployment.zip
