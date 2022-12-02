@@ -89,7 +89,7 @@ def list_of_titles():
         test_ratio=args.data_test_ratio,
         valid_ratio=args.data_valid_ratio,
     )
-    print(list(dataset.movie_info["title"]))
+    return list(dataset.movie_info["title"])
 
 
 if __name__ == "__main__":
