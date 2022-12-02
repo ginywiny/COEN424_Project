@@ -41,8 +41,10 @@ def infer(user_ratings, top_n):
                         np.array(range(dataset._num_movie), # find rating for these movies
                                  dtype=np.int64))
     decode_graph_infer = dataset.generate_dec_graph_infer(rating_pairs)
-    encode_graph_infer = encode_graph_infer.int().to(args.device)
-    decode_graph_infer = decode_graph_infer.int().to(args.device)
+    # encode_graph_infer = encode_graph_infer.int().to(args.device)
+    # decode_graph_infer = decode_graph_infer.int().to(args.device)
+    encode_graph_infer = encode_graph_infer.int().to('cpu')
+    decode_graph_infer = decode_graph_infer.int().to('cpu')
     infered_ratings = net(
             encode_graph_infer,
             decode_graph_infer,
@@ -87,7 +89,7 @@ def title_to_id(title):
         valid_ratio=args.data_valid_ratio,
     )
     mylist=list(dataset.movie_info["title"])
-    return mylist.index(title)
+    return mylist.index(title) + 1 # The IDs start at 1 NOT 0
 
 def list_of_titles():
     args = config()
@@ -103,5 +105,6 @@ def list_of_titles():
 
 
 if __name__ == "__main__":
-    user_ratings = {1:5,13:5,15:4,16:5}
+    # user_ratings = {1:5,13:5,15:4,16:5}
+    user_ratings = {1: 5, 23: 3, 2: 4}
     infer(user_ratings,6)
