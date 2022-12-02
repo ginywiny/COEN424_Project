@@ -54,6 +54,44 @@ def infer(user_ratings, top_n):
 
 
 
+def id_to_title(id):
+    args = config()
+    dataset = MovieLens(
+        args.data_name,
+        args.device,
+        use_one_hot_fea=args.use_one_hot_fea,
+        symm=args.gcn_agg_norm_symm,
+        test_ratio=args.data_test_ratio,
+        valid_ratio=args.data_valid_ratio,
+    )
+    return dataset.movie_info["title"][int(id)]
+
+def title_to_id(title):
+    args = config()
+    dataset = MovieLens(
+        args.data_name,
+        args.device,
+        use_one_hot_fea=args.use_one_hot_fea,
+        symm=args.gcn_agg_norm_symm,
+        test_ratio=args.data_test_ratio,
+        valid_ratio=args.data_valid_ratio,
+    )
+    mylist=list(dataset.movie_info["title"])
+    return mylist.index(title)
+
+def list_of_titles():
+    args = config()
+    dataset = MovieLens(
+        args.data_name,
+        args.device,
+        use_one_hot_fea=args.use_one_hot_fea,
+        symm=args.gcn_agg_norm_symm,
+        test_ratio=args.data_test_ratio,
+        valid_ratio=args.data_valid_ratio,
+    )
+    print(list(dataset.movie_info["title"]))
+
+
 if __name__ == "__main__":
     user_ratings = {1:5,13:5,15:4,16:5}
     infer(user_ratings,6)

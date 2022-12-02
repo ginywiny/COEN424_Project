@@ -115,10 +115,10 @@ class MovieLens(object):
         else:
             root_folder = name
         self._dir = os.path.join(download_dir, name, root_folder)
-        print("Starting processing {} ...".format(self._name))
+        # print("Starting processing {} ...".format(self._name))
         self._load_raw_user_info()
         self._load_raw_movie_info()
-        print('......')
+        # print('......')
         if self._name == 'ml-100k':
             self.all_train_rating_info = self._load_raw_rates(os.path.join(self._dir, 'u1.base'), '\t')
             self.test_rating_info = self._load_raw_rates(os.path.join(self._dir, 'u1.test'), '\t')
@@ -131,18 +131,18 @@ class MovieLens(object):
             self.all_train_rating_info = self.all_rating_info.iloc[shuffled_idx[num_test: ]]
         else:
             raise NotImplementedError
-        print('......')
+        # print('......')
         num_valid = int(np.ceil(self.all_train_rating_info.shape[0] * self._valid_ratio))
         shuffled_idx = np.random.permutation(self.all_train_rating_info.shape[0])
         self.valid_rating_info = self.all_train_rating_info.iloc[shuffled_idx[: num_valid]]
         self.train_rating_info = self.all_train_rating_info.iloc[shuffled_idx[num_valid: ]]
         self.possible_rating_values = np.unique(self.train_rating_info["rating"].values)
 
-        print("All rating pairs : {}".format(self.all_rating_info.shape[0]))
-        print("\tAll train rating pairs : {}".format(self.all_train_rating_info.shape[0]))
-        print("\t\tTrain rating pairs : {}".format(self.train_rating_info.shape[0]))
-        print("\t\tValid rating pairs : {}".format(self.valid_rating_info.shape[0]))
-        print("\tTest rating pairs  : {}".format(self.test_rating_info.shape[0]))
+        # print("All rating pairs : {}".format(self.all_rating_info.shape[0]))
+        # print("\tAll train rating pairs : {}".format(self.all_train_rating_info.shape[0]))
+        # print("\t\tTrain rating pairs : {}".format(self.train_rating_info.shape[0]))
+        # print("\t\tValid rating pairs : {}".format(self.valid_rating_info.shape[0]))
+        # print("\tTest rating pairs  : {}".format(self.test_rating_info.shape[0]))
 
         self.user_info = self._drop_unseen_nodes(orign_info=self.user_info,
                                                  cmp_col_name="id",
@@ -156,8 +156,8 @@ class MovieLens(object):
         # Map user/movie to the global id
         self.global_user_id_map = {ele: i for i, ele in enumerate(self.user_info['id'])}
         self.global_movie_id_map = {ele: i for i, ele in enumerate(self.movie_info['id'])}
-        print('Total user number = {}, movie number = {}'.format(len(self.global_user_id_map),
-                                                                 len(self.global_movie_id_map)))
+        # print('Total user number = {}, movie number = {}'.format(len(self.global_user_id_map),
+        #                                                          len(self.global_movie_id_map)))
         self._num_user = len(self.global_user_id_map) +1
         self._num_movie = len(self.global_movie_id_map)
 
@@ -182,7 +182,7 @@ class MovieLens(object):
         info_line = "Feature dim: "
         info_line += "\nuser: {}".format(self.user_feature_shape)
         info_line += "\nmovie: {}".format(self.movie_feature_shape)
-        print(info_line)
+        # print(info_line)
 
         all_train_rating_pairs, all_train_rating_values = self._generate_pair_value(self.all_train_rating_info)
         train_rating_pairs, train_rating_values = self._generate_pair_value(self.train_rating_info)
@@ -213,24 +213,24 @@ class MovieLens(object):
                 rst += graph.number_of_edges(str(r))
             return rst
 
-        print("Train enc graph: \t#user:{}\t#movie:{}\t#pairs:{}".format(
-            self.train_enc_graph.number_of_nodes('user'), self.train_enc_graph.number_of_nodes('movie'),
-            _npairs(self.train_enc_graph)))
-        print("Train dec graph: \t#user:{}\t#movie:{}\t#pairs:{}".format(
-            self.train_dec_graph.number_of_nodes('user'), self.train_dec_graph.number_of_nodes('movie'),
-            self.train_dec_graph.number_of_edges()))
-        print("Valid enc graph: \t#user:{}\t#movie:{}\t#pairs:{}".format(
-            self.valid_enc_graph.number_of_nodes('user'), self.valid_enc_graph.number_of_nodes('movie'),
-            _npairs(self.valid_enc_graph)))
-        print("Valid dec graph: \t#user:{}\t#movie:{}\t#pairs:{}".format(
-            self.valid_dec_graph.number_of_nodes('user'), self.valid_dec_graph.number_of_nodes('movie'),
-            self.valid_dec_graph.number_of_edges()))
-        print("Test enc graph: \t#user:{}\t#movie:{}\t#pairs:{}".format(
-            self.test_enc_graph.number_of_nodes('user'), self.test_enc_graph.number_of_nodes('movie'),
-            _npairs(self.test_enc_graph)))
-        print("Test dec graph: \t#user:{}\t#movie:{}\t#pairs:{}".format(
-            self.test_dec_graph.number_of_nodes('user'), self.test_dec_graph.number_of_nodes('movie'),
-            self.test_dec_graph.number_of_edges()))
+        # print("Train enc graph: \t#user:{}\t#movie:{}\t#pairs:{}".format(
+        #     self.train_enc_graph.number_of_nodes('user'), self.train_enc_graph.number_of_nodes('movie'),
+        #     _npairs(self.train_enc_graph)))
+        # print("Train dec graph: \t#user:{}\t#movie:{}\t#pairs:{}".format(
+        #     self.train_dec_graph.number_of_nodes('user'), self.train_dec_graph.number_of_nodes('movie'),
+        #     self.train_dec_graph.number_of_edges()))
+        # print("Valid enc graph: \t#user:{}\t#movie:{}\t#pairs:{}".format(
+        #     self.valid_enc_graph.number_of_nodes('user'), self.valid_enc_graph.number_of_nodes('movie'),
+        #     _npairs(self.valid_enc_graph)))
+        # print("Valid dec graph: \t#user:{}\t#movie:{}\t#pairs:{}".format(
+        #     self.valid_dec_graph.number_of_nodes('user'), self.valid_dec_graph.number_of_nodes('movie'),
+        #     self.valid_dec_graph.number_of_edges()))
+        # print("Test enc graph: \t#user:{}\t#movie:{}\t#pairs:{}".format(
+        #     self.test_enc_graph.number_of_nodes('user'), self.test_enc_graph.number_of_nodes('movie'),
+        #     _npairs(self.test_enc_graph)))
+        # print("Test dec graph: \t#user:{}\t#movie:{}\t#pairs:{}".format(
+        #     self.test_dec_graph.number_of_nodes('user'), self.test_dec_graph.number_of_nodes('movie'),
+        #     self.test_dec_graph.number_of_edges()))
 
     def _generate_pair_value(self, rating_info):
         rating_pairs = (np.array([self.global_user_id_map[ele] for ele in rating_info["user_id"]],
