@@ -5,6 +5,9 @@ import re
 import pandas as pd
 import scipy.sparse as sp
 import torch as th
+import os
+
+os.environ["CUDA_VISIBLE_DEVICES"]=""
 
 import dgl
 from dgl.data.utils import download, extract_archive, get_download_dir
@@ -24,6 +27,8 @@ GENRES_ML_100K =\
      'Thriller', 'War', 'Western']
 GENRES_ML_1M = GENRES_ML_100K[1:]
 GENRES_ML_10M = GENRES_ML_100K + ['IMAX']
+
+th.cuda.is_available = lambda : False
 
 class MovieLens(object):
     """MovieLens dataset used by GCMC model
@@ -102,7 +107,8 @@ class MovieLens(object):
                  test_ratio=0.1, valid_ratio=0.1):
         self._name = name
         self._device = device
-        self._symm = symm
+        device = th.device('cuda' if th.cuda.is_available() else 'cpu')
+        self._symm = symm   
         self._test_ratio = test_ratio
         self._valid_ratio = valid_ratio
         # download and extract
@@ -443,8 +449,17 @@ class MovieLens(object):
         user_info : pd.DataFrame
         """
         if self._name == 'ml-100k':
+            dir_path = os.path.dirname(os.path.realpath(__file__))
+            
+            # print("path: ", dir_path)
+            # full_path = dir_path + "/ml-100k/ml-100k/"
+            # print(full_path)
+            # self.user_info = pd.read_csv(os.path.join(full_path, 'u.user'), sep='|', header=None,
             self.user_info = pd.read_csv(os.path.join(self._dir, 'u.user'), sep='|', header=None,
+            
+            # self.user_info = pd.read_csv(os.path.join(self._dir, 'u.user'), sep='|', header=None,
                                     names=['id', 'age', 'gender', 'occupation', 'zip_code'], engine='python')
+        
         elif self._name == 'ml-1m':
             self.user_info = pd.read_csv(os.path.join(self._dir, 'users.dat'), sep='::', header=None,
                                     names=['id', 'gender', 'age', 'occupation', 'zip_code'], engine='python')

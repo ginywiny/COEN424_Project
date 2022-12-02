@@ -74,8 +74,11 @@ class GCMCGraphConv(nn.Module):
             cj = graph.srcdata['cj']
             ci = graph.dstdata['ci']
             if self.device is not None:
-                cj = cj.to(self.device)
-                ci = ci.to(self.device)
+                # FORCE TO USE CPU!
+                # cj = cj.to(self.device)
+                # ci = ci.to(self.device)
+                cj = cj.to('cpu')
+                ci = ci.to('cpu')
             if weight is not None:
                 if self.weight is not None:
                     raise DGLError('External weight is provided while at the same time the'
