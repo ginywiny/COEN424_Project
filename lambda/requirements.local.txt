@@ -15,6 +15,7 @@ click==6.6
 debugpy==1.6.3
 decorator==5.1.1
 defusedxml==0.7.1
+dgl==0.9.1
 entrypoints==0.4
 executing==1.1.1
 fastjsonschema==2.16.2
@@ -38,6 +39,7 @@ jupyter_client==7.4.3
 jupyter_core==4.11.2
 jupyterlab-pygments==0.2.2
 jupyterlab-widgets==3.0.3
+keyboard==0.13.5
 MarkupSafe==2.1.1
 matplotlib-inline==0.1.6
 mistune==2.0.4

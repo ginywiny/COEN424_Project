@@ -15,6 +15,7 @@ click
 debugpy
 decorator
 defusedxml
+dgl
 entrypoints
 executing
 fastjsonschema
