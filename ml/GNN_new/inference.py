@@ -1,7 +1,11 @@
 from train import *
 from data import *
+import torch as th
+import os
 
+os.environ["CUDA_VISIBLE_DEVICES"]=""
 
+th.cuda.is_available = lambda : False
 def infer(user_ratings, top_n):
     args = config()
     dataset = MovieLens(
@@ -12,16 +16,22 @@ def infer(user_ratings, top_n):
         test_ratio=args.data_test_ratio,
         valid_ratio=args.data_valid_ratio,
     )
+    # device = th.device('cuda' if th.cuda.is_available() else 'cpu')
+    device = th.device('cpu')
     args.src_in_units = dataset.user_feature_shape[1]
     args.dst_in_units = dataset.movie_feature_shape[1]
     args.rating_vals = dataset.possible_rating_values
     net = Net(args=args)
-    net = net.to(args.device)
-    net.load_state_dict(th.load("./model.pth"))
+    # net = net.to(args.device)
+    net = net.to('cpu')
+    net.load_state_dict(th.load("./model.pth", map_location=th.device('cpu')))
     net.eval()
+    # nd_possible_rating_values = th.FloatTensor(
+    #     dataset.possible_rating_values
+    # ).to(args.device)
     nd_possible_rating_values = th.FloatTensor(
         dataset.possible_rating_values
-    ).to(args.device)
+    ).to('cpu')
     # I should create graph with all of the users and movies and get the row of my desired user
     user_rating_movies = list(user_ratings.keys()) #someone like user with id = 1
     user_rating_values = list(user_ratings.values())
