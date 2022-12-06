@@ -61,9 +61,11 @@ def infer(user_ratings, top_n):
             * nd_possible_rating_values.view(1, -1)
         ).sum(dim=1)
     # print(th.topk(real_pred_ratings.flatten(), top_n).indices)
-    indices = th.topk(real_pred_ratings.flatten(), top_n).indices
+    # indices = th.topk(real_pred_ratings.flatten(), top_n + 10).indices
+    indices = th.topk(real_pred_ratings.flatten(), top_n + 20).indices
+    indices = [int(i) for i in indices if int(i)+1 not in user_rating_movies]
     movie_names = []
-    for indice in indices:
+    for indice in indices[0:top_n]:
         movie_names.append(dataset.movie_info["title"][int(indice)])
     # print(movie_names)
     return movie_names
