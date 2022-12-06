@@ -39,7 +39,8 @@ def getMovieID(movie) :
 def getUserMovies():
     # Input movie name and rating
     global movie_map
-    print("Please enter movie name and its rating from 1 to 5...")
+    print("Please select movie names and their rating from 1 to 5...")
+    print()
     while True:
         done = input("Done selecting movies? y/n: ")
         if (done == "y"):

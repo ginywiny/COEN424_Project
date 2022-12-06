@@ -10,7 +10,9 @@
 
 4. Run `python3 client.py`
 
-5. Any changes in the source code can be redeployed with `./source/deploy.sh`
+5. Any changes in the `/source` code can be redeployed with `./source/deploy.sh`
+
+6. A test example without user input can be issued using `python3 send_test.py`
 
 ## Other Information
 1. EFS + EC2 configuration guide: https://towardsdatascience.com/deploying-large-packages-on-aws-lambda-using-efs-3a707f83d918
