@@ -8,7 +8,9 @@
 
 3. Input AWS keys `aws_access_key_id` and `aws_secret_access_key` in `lambda/config.yaml`
 
-4. Run `client.py`
+4. Run `python3 client.py`
+
+5. Any changes in the source code can be redeployed with `./source/deploy.sh`
 
 ## Other Information
 1. EFS + EC2 configuration guide: https://towardsdatascience.com/deploying-large-packages-on-aws-lambda-using-efs-3a707f83d918
