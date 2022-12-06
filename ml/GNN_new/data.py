@@ -455,7 +455,7 @@ class MovieLens(object):
             # full_path = dir_path + "/ml-100k/ml-100k/"
             # print(full_path)
             # self.user_info = pd.read_csv(os.path.join(full_path, 'u.user'), sep='|', header=None,
-            self.user_info = pd.read_csv(os.path.join(self._dir, 'u.user'), sep='|', header=None,
+            self.user_info = pd.read_csv(os.path.join(self._dir, 'u.user', encoding= 'unicode_escape'), sep='|', header=None,
             
             # self.user_info = pd.read_csv(os.path.join(self._dir, 'u.user'), sep='|', header=None,
                                     names=['id', 'age', 'gender', 'occupation', 'zip_code'], engine='python')

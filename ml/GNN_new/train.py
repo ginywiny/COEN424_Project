@@ -111,21 +111,21 @@ def train(args):
     train_gt_ratings = dataset.train_truths
 
     ### prepare the logger
-    train_loss_logger = MetricLogger(
-        ["iter", "loss", "rmse"],
-        ["%d", "%.4f", "%.4f"],
-        os.path.join(args.save_dir, "train_loss%d.csv" % args.save_id),
-    )
-    valid_loss_logger = MetricLogger(
-        ["iter", "rmse"],
-        ["%d", "%.4f"],
-        os.path.join(args.save_dir, "valid_loss%d.csv" % args.save_id),
-    )
-    test_loss_logger = MetricLogger(
-        ["iter", "rmse"],
-        ["%d", "%.4f"],
-        os.path.join(args.save_dir, "test_loss%d.csv" % args.save_id),
-    )
+    # train_loss_logger = MetricLogger(
+    #     ["iter", "loss", "rmse"],
+    #     ["%d", "%.4f", "%.4f"],
+    #     os.path.join(args.save_dir, "train_loss%d.csv" % args.save_id),
+    # )
+    # valid_loss_logger = MetricLogger(
+    #     ["iter", "rmse"],
+    #     ["%d", "%.4f"],
+    #     os.path.join(args.save_dir, "valid_loss%d.csv" % args.save_id),
+    # )
+    # test_loss_logger = MetricLogger(
+    #     ["iter", "rmse"],
+    #     ["%d", "%.4f"],
+    #     os.path.join(args.save_dir, "test_loss%d.csv" % args.save_id),
+    # )
 
     ### declare the loss information
     best_valid_rmse = np.inf
