@@ -6,7 +6,7 @@
 2. Install requirements on local computer
 `pip install -r requirements.efs.txt`
 
-3. Input AWS keys `aws_access_key_id` and `aws_secret_access_key` in `lambda/config.yaml`
+3. Input AWS keys `aws_access_key_id` and `aws_secret_access_key` in `lambda/config.yaml` if in development
 
 4. Run `python3 client.py`
 
@@ -21,8 +21,10 @@
 
 3. If any packages are missing, install with `pip3 install <packagename>`
 
-### EC2
-- Set the AWS access keys before anything in config.yaml
+4. POST API at `https://hxudmk07fj.execute-api.us-east-1.amazonaws.com/default/MovieRecommendation`
+
+### AWS
+- Set the AWS access keys before anything in config.yaml to develop
 ```
 aws_access_key_id:
 aws_secret_access_key: 
