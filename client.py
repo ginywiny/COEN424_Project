@@ -42,10 +42,6 @@ def getUserMovies():
     print("Please select movie names and their rating from 1 to 5...")
     print()
     while True:
-        done = input("Done selecting movies? y/n: ")
-        if (done == "y"):
-            break
-        
         # Take movie name
         movie_name = ""
         while True:
@@ -80,8 +76,12 @@ def getUserMovies():
             
         print("Movie and Rating: ", movie_name, " ID:", movie_name_ID, " Rating:" , movie_rating)
         print()
-        # movie_map["movieName"][movie_name] = movie_rating
         movie_map["movieName"][movie_name_ID] = movie_rating
+        
+        # Is done selecting movies
+        done = input("Done selecting movies? y/n: ")
+        if (done == "y"):
+            break
     
     # Input movie recommendation count
     print()
@@ -99,7 +99,6 @@ def getUserMovies():
             break
         
     movie_map["movieCount"] = movie_count
-    # print("movie_map: ", movie_map)
     print("Predicting recommendations...")
     
 # POST request and receive response for prediction of recommendations
@@ -108,7 +107,6 @@ def sendRequest():
     json_movie_map = json.dumps(movie_map)
     json_response = requests.post("https://hxudmk07fj.execute-api.us-east-1.amazonaws.com/default/MovieRecommendation", json=json_movie_map)
     json_response = json_response.json()
-    # print(json_response)
     return json_response["movie_recommendation"] 
 
 if __name__ == "__main__":
