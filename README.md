@@ -58,3 +58,4 @@ sudo pip3 install -r /tmp/requirements.1.txt --target /mnt/efs/fs1/lib --no-cach
 ```
 
 Remember to start the EC2 instance. It contains the EFS with an Access Point which the Lambda points to to resolve runtime dependencies.
+Once installed, EC2 may be shut down, as EFS will be configured.
